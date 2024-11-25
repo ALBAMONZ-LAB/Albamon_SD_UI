@@ -2,7 +2,7 @@ export const eventResolvers = {
   Query: {
     getEventPageComponents: async (
       _: any,
-      { eventId }: { eventId: string },
+      { eventId }: { eventId: string }
     ) => {
       return {
         resultCode: "SUCCESS",
@@ -63,21 +63,25 @@ export const eventResolvers = {
               "https://img.albamon.kr/banner//2024/10/cjetnd28144129.jpg?v=1732498088001",
           },
           {
-            type: "IMAGE_WITH_BUTTON",
-            backgroundColor: "#fff",
+            type: "IMAGE_WITH_CHILDREN",
+            backgroundColor: "#ff7e1d",
             children: [
               {
                 type: "IMAGE",
+                backgroundColor: "#fff",
+                // TODO 사이즈 확인 필요
+                width: 260,
+                height: 200,
                 imageUrl:
                   "https://mts17-mc.albamon.kr/monimg/msa/assets/images/events/campusBattle/share_top.png",
               },
               {
-                type: "BUTTON",
-                onClick: "handleButtonClick",
-                icon: "https://mts17-mc.albamon.kr/monimg/msa/assets/images/events/campusBattle/kakao_icon.png",
-                color: "#000000",
-                backgroundColor: "#000000",
-                text: "카카오톡으로 공유하기",
+                // 카카오톡으로 공유하기
+                type: "IMAGE",
+                onClick: "handleImageClick",
+                width: 260,
+                height: 46,
+                imageUrl: "",
               },
             ],
           },
@@ -89,40 +93,47 @@ export const eventResolvers = {
             paddingRight: 24,
           },
           {
-            type: "IMAGE",
-            backgroundColor: "#fff",
+            type: "IMAGE_WITH_CHILDREN",
+            backgroundColor: "#ff7e1d",
             paddingTop: 0,
             paddingBottom: 0,
             paddingLeft: 24,
             paddingRight: 24,
-            textAlign: "center",
-            width: 260,
-            height: 21,
-            imageUrl:
-              "https://mts17-mc.albamon.kr/monimg/msa/assets/images/events/campusBattle/instagram.png",
-          },
-          {
-            type: "BUTTON_GROUP",
-            backgroundColor: "#fff",
-            direction: "row",
-            justifyContent: "center",
-            gap: 8,
-            buttons: [
+            children: [
               {
-                type: "BUTTON",
-                text: "이미지 다운로드",
-                backgroundColor: "#ffffff",
-                textColor: "#000000",
-                borderColor: "#e5e5e5",
-                height: 48,
+                type: "IMAGE",
+                backgroundColor: "#fff",
+                width: 260,
+                height: 21,
+                imageUrl:
+                  "https://mts17-mc.albamon.kr/monimg/msa/assets/images/events/campusBattle/instagram.png",
               },
               {
-                type: "BUTTON",
-                text: "텍스트 복사하기",
-                backgroundColor: "#ffffff",
-                textColor: "#000000",
-                borderColor: "#e5e5e5",
-                height: 48,
+                type: "BUTTON_GROUP",
+                backgroundColor: "#fff",
+                direction: "row",
+                justifyContent: "center",
+                gap: 8,
+                buttons: [
+                  {
+                    type: "BUTTON",
+                    text: "이미지 다운로드",
+                    onClick: "handleImageDownload",
+                    backgroundColor: "#ffffff",
+                    textColor: "#000000",
+                    borderColor: "#e5e5e5",
+                    height: 48,
+                  },
+                  {
+                    type: "BUTTON",
+                    text: "텍스트 복사하기",
+                    onClick: "handleTextCopy",
+                    backgroundColor: "#ffffff",
+                    textColor: "#000000",
+                    borderColor: "#e5e5e5",
+                    height: 48,
+                  },
+                ],
               },
             ],
           },
@@ -166,6 +177,7 @@ export const eventResolvers = {
           {
             type: "FOOTER",
             text: "꼭 읽어주세요!",
+            backgroundColor: "#000",
             fontSize: 16,
             fontWeight: "700",
             textAlign: "left",
@@ -210,12 +222,25 @@ export const eventResolvers = {
             ],
           },
           {
-            type: "BUTTON",
-            icon: [
-              "https://mts17-mc.albamon.kr/monimg/msa/assets/images/events/kims/moni.png",
-              "https://mts17-mc.albamon.kr/monimg/msa/assets/images/events/kims/more-event-text.png",
-            ],
+            type: "IMAGE_GROUP",
             backgroundColor: "#fff",
+            direction: "row",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: 8,
+            onClick: "handleImageGroupClick",
+            buttons: [
+              {
+                type: "IMAGE",
+                imageUrl:
+                  "https://mts17-mc.albamon.kr/monimg/msa/assets/images/events/kims/more-event-text.png",
+              },
+              {
+                type: "IMAGE",
+                imageUrl:
+                  "https://mts17-mc.albamon.kr/monimg/msa/assets/images/events/kims/moni.png",
+              },
+            ],
           },
         ],
       };
