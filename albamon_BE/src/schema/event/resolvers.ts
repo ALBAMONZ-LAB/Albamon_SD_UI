@@ -77,7 +77,7 @@ export const eventResolvers = {
               },
               {
                 // 카카오톡으로 공유하기
-                type: "IMAGE",
+                type: "IMAGE_BUTTON",
                 onClick: "handleImageClick",
                 width: 260,
                 height: 46,
