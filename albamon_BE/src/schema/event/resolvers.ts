@@ -63,7 +63,7 @@ export const eventResolvers = {
               "https://img.albamon.kr/banner//2024/10/cjetnd28144129.jpg?v=1732498088001",
           },
           {
-            type: "IMAGE_WITH_CHILDREN",
+            type: "GROUP",
             backgroundColor: "#ff7e1d",
             children: [
               {
@@ -93,7 +93,7 @@ export const eventResolvers = {
             paddingRight: 24,
           },
           {
-            type: "IMAGE_WITH_CHILDREN",
+            type: "GROUP",
             backgroundColor: "#ff7e1d",
             paddingTop: 0,
             paddingBottom: 0,
@@ -109,12 +109,12 @@ export const eventResolvers = {
                   "https://mts17-mc.albamon.kr/monimg/msa/assets/images/events/campusBattle/instagram.png",
               },
               {
-                type: "BUTTON_GROUP",
+                type: "GROUP",
                 backgroundColor: "#fff",
                 direction: "row",
                 justifyContent: "center",
                 gap: 8,
-                buttons: [
+                childre: [
                   {
                     type: "BUTTON",
                     text: "이미지 다운로드",
@@ -222,14 +222,14 @@ export const eventResolvers = {
             ],
           },
           {
-            type: "IMAGE_GROUP",
+            type: "GROUP",
             backgroundColor: "#fff",
             direction: "row",
             justifyContent: "center",
             alignItems: "center",
             gap: 8,
             onClick: "handleImageGroupClick",
-            buttons: [
+            children: [
               {
                 type: "IMAGE",
                 imageUrl:
