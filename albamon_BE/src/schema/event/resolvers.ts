@@ -63,7 +63,7 @@ export const eventResolvers = {
               "https://img.albamon.kr/banner//2024/10/cjetnd28144129.jpg?v=1732498088001",
           },
           {
-            type: "GROUP",
+            type: "IMAGE_WITH_CHILDREN",
             backgroundColor: "#ff7e1d",
             children: [
               {
@@ -77,11 +77,10 @@ export const eventResolvers = {
               },
               {
                 // 카카오톡으로 공유하기
-                type: "IMAGE_BUTTON",
-                onClick: "handleImageClick",
+                type: "BUTTON",
+                onClick: "handleKakaoShareClick",
                 width: 260,
                 height: 46,
-                imageUrl: "",
               },
             ],
           },
@@ -95,6 +94,7 @@ export const eventResolvers = {
           {
             type: "GROUP",
             backgroundColor: "#ff7e1d",
+            width: "100%",
             paddingTop: 0,
             paddingBottom: 0,
             paddingLeft: 24,
@@ -114,7 +114,7 @@ export const eventResolvers = {
                 direction: "row",
                 justifyContent: "center",
                 gap: 8,
-                childre: [
+                children: [
                   {
                     type: "BUTTON",
                     text: "이미지 다운로드",
