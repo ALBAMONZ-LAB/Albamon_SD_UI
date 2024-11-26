@@ -5,6 +5,10 @@ export const Footer = ({
   fontSize,
   fontWeight,
   textAlign,
+  paddingTop,
+  paddingBottom,
+  paddingLeft,
+  paddingRight,
   children,
 }) => (
   <footer
@@ -14,6 +18,10 @@ export const Footer = ({
       fontSize,
       fontWeight,
       textAlign,
+      paddingTop,
+      paddingBottom,
+      paddingLeft,
+      paddingRight,
     }}
   >
     {text}

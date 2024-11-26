@@ -15,7 +15,7 @@ import {
   EventHandlerType,
   EventUserType,
 } from '@utils/eventHandler';
-import { List } from '@components/lib/Event/List';
+import { List } from '@components/lib/Event/List/List';
 
 const cx = classNames.bind(styles);
 const rootClass = 'event-template';

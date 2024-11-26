@@ -1,10 +1,10 @@
 export const List = ({ text, fontSize, color }) => (
-  <div
+  <li
     style={{
       fontSize,
       color,
     }}
   >
     {text}
-  </div>
+  </li>
 );

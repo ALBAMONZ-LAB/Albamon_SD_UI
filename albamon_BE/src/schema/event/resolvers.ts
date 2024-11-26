@@ -182,6 +182,13 @@ export const eventResolvers = {
             fontWeight: "400",
             textAlign: "left",
             color: "#fff",
+            paddingTop: 20,
+            paddingBottom: 20,
+            paddingLeft: 16,
+            paddingRight: 16,
+            display: "flex",
+            flexDirection: "column",
+            gap: "8px",
             children: [
               {
                 type: "LIST",
