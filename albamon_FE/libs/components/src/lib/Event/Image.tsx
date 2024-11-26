@@ -6,6 +6,8 @@ export const Image = ({
   paddingLeft,
   paddingRight,
   width,
+  height,
+  onClick,
 }) => (
   <div
     style={{
@@ -14,6 +16,8 @@ export const Image = ({
       paddingBottom,
       paddingLeft,
       paddingRight,
+      width,
+      height,
     }}
   >
     <img src={imageUrl} alt="example" style={{ width }} />

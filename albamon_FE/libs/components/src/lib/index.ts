@@ -4,4 +4,6 @@ export * from '@components/lib/Event/Title';
 export * from '@components/lib/Event/Footer';
 export * from '@components/lib/Event/FloatingButton';
 export * from '@components/lib/Event/Image';
-export * from '@components/lib/Event/ImageWithButton';
+export * from '@components/lib/Event/ImageWithChildren';
+export * from '@components/lib/Event/Split';
+export * from '@components/lib/Event/Carousel';

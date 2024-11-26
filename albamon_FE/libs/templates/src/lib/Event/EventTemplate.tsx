@@ -5,9 +5,10 @@ import { GET_EVENT_LIST } from '@graphql/event';
 import {
   FloatingButton,
   Footer,
-  ImageWithButton,
+  ImageWithChildren,
   Title,
   Image,
+  Split,
 } from '@components/lib';
 import {
   eventHandlers,
@@ -18,12 +19,14 @@ import {
 const cx = classNames.bind(styles);
 const rootClass = 'event-template';
 
-const EVENT_BUTTONS = ['BUTTON', 'FLOATING_BUTTON', 'IMAGE_WITH_BUTTON'];
+const EVENT_BUTTONS = ['BUTTON', 'FLOATING_BUTTON', 'IMAGE_WITH_CHILDREN'];
 
 const MAPPED_COMPONENTS = {
   TITLE: Title,
-  IMAGE_WITH_BUTTON: ImageWithButton,
+  IMAGE_WITH_CHILDREN: ImageWithChildren,
   IMAGE: Image,
+  SPLIT: Split,
+  CAROUSEL: 'carousel',
   FLOATING_BUTTON: FloatingButton,
   FOOTER: Footer,
 };
