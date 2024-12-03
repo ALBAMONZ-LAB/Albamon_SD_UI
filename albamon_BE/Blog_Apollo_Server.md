@@ -22,7 +22,7 @@
 
 예를 들어, 프론트엔드는 상품의 가격 정보만 있으면 되는데 백엔드에서 상품의 모든 정보와 판매자 및 구매자의 정보까지 모조리 보내주고 있었습니다. 처음에는 체감상 큰 문제는 없어서 방치했습니다. 하지만 해당 API는 다른 기능에서도 사용되고 있었기에 요구사항에 따라 변경되었고, 이에 따른 JOIN 쿼리가 많아지면서 문제가 생기기 시작했습니다.
 
-![alt text](image-5.png)
+<img src="image-5.png" alt="alt text" width="50%" />
 
 이 페이지에 보여줄건 가격 정보 단 하나인데 왜 이렇게 느리고 뚱뚱한 데이터를 받아서 페이지가 느려져야 하는지 억울한 마음이 들었습니다.
 
@@ -36,11 +36,11 @@
 
 "GraphQL 한번 찾아봐. 그거 쓰면 그런 거 다 해결할 수 있어."
 
-![alt text](image-11.png)
+<img src="image-11.png" alt="alt text" width="50%" />
 
 처음 들어보는 GraphQL이란 단어에 궁금증이 생겨 찾아보게 되었습니다.
 
-![alt text](image-2.png)
+<img src="image-2.png" alt="alt text" width="50%" />
 
 <!-- // 너무 빨리 넘어가면 안되는 부분 : 독자가 설득이 안됨 -->
 
@@ -54,7 +54,7 @@ GraphQL을 찾아보니 2019년부터 존재했던 기술이었습니다. 더 �
 
 이런 장점들을 보면서 "와, 이거 정말 우리가 겪고 있는 문제들을 해결할 수 있겠는데?" 하는 생각이 들었습니다.
 
-![alt text](image-13.png)
+<img src="image-13.png" alt="alt text" width="50%" />
 
 이것을 알게 된 후, 당시 Spring Boot로 서버를 구축하고 있었는데 과감하게 연동을 시도해보았습니다. 결과적으로는 성공하지 못했고, 더 시급한 업무들이 쌓여 깊이 있게 연구할 시간이 부족했습니다.
 
@@ -77,7 +77,7 @@ GraphQL을 찾아보니 2019년부터 존재했던 기술이었습니다. 더 �
 
 까짓거 한 번 해보기로 했습니다.😎
 
-![alt text](image.png)
+<img src="image.png" alt="alt text" width="50%" />
 
 우리 팀은 알바몬에서 SDUI가 필요한 상황을 재현해보고 파일럿을 진행했습니다. 많관부
 
@@ -105,7 +105,7 @@ GraphQL을 찾아보니 2019년부터 존재했던 기술이었습니다. 더 �
 
 ## 🎯 Episode 2: GraphQL이란?
 
-![alt text](image-6.png)
+<img src="image-6.png" alt="alt text" width="50%" />
 이미지 출처: https://www.wallarm.com/what/what-is-graphql-definition-with-example
 
 GraphQL은 쿼리 언어입니다. 쿼리 언어라는 것은 데이터를 조회하는 언어라는 것을 의미합니다.
@@ -113,7 +113,7 @@ GraphQL은 쿼리 언어입니다. 쿼리 언어라는 것은 데이터를 조�
 
 GraphQL을 사용하는 회사로 대표적으로 Airbnb가 있는데 아래 그림을 한 번 보시죠!
 
-![alt text](image-9.png)
+<img src="image-9.png" alt="alt text" width="50%" />
 출처 : A Deep Dive into Airbnb’s Server-Driven UI System
 https://medium.com/airbnb-engineering/a-deep-dive-into-airbnbs-server-driven-ui-system-842244c5f5
 
@@ -123,7 +123,7 @@ https://medium.com/airbnb-engineering/a-deep-dive-into-airbnbs-server-driven-ui-
 
 그럼 우리도 할 수 있지 않을까!?!?!
 
-![alt text](image-14.png)
+<img src="image-14.png" alt="alt text" width="50%" />
 
 이와 비슷하게 알바몬에서 적용할 수는 없을까 고민해보았습니다.
 
@@ -131,14 +131,14 @@ https://medium.com/airbnb-engineering/a-deep-dive-into-airbnbs-server-driven-ui-
 - 이미지
 - 버튼
 
-![alt text](image-35.png)
+<img src="image-35.png" alt="alt text" width="50%" />
 
 <!-- 이 페이지를 위의 airbnb처럼 section을 나누어서 보여주기. 스키마도 추가. 세 개의 이미지를 가로로 나열해서 보여주는 느낌으로 -->
 
 요즘 광고 여기저기서 볼 수 있는 핫하신 변우석 님의 얼굴이 담긴 이벤트 페이지 입니다.
 이 이벤트 페이지를 섹션으로 나누자면 세 가지로 나눌 수 있습니다.
 
-![alt text](image-34.png)
+<img src="image-34.png" alt="alt text" width="50%" />
 
 이것을 GraphQL 스키마로 구성해 보면 다음과 같습니다.
 
@@ -269,7 +269,7 @@ query GetEventPageMinimal {
 }
 ```
 
-![alt text](image-15.png)
+<img src="image-15.png" alt="alt text" width="50%" />
 AMAZING !!
 
 <!-- 이미지 추가 -->
@@ -290,18 +290,18 @@ REST API가 미리 정해진 세트 메뉴라면, GraphQL은 원하는 만큼만
 
 <!-- 세트 메뉴, 뷔페 사진 추가 -->
 
-![alt text](image-19.png) GraphQL 뷔페
+<img src="image-19.png" alt="alt text" width="50%" /> GraphQL 뷔페
 출처: https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.tamnao.com%2Fweb%2Fsp%2FdetailPrdt.do%3FprdtNum%3DSP00001383&psig=AOvVaw19mlPQoVAEAhiaxEePVaPp&ust=1733210300877000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCOCptdXFiIoDFQAAAAAdAAAAABAw
 
-![alt text](image-18.png) REST API 세트메뉴(죠스떡볶이)
+<img src="image-18.png" alt="alt text" width="50%" /> REST API 세트메뉴(죠스떡볶이)
 출처: https://m.joseilbo.com/news/view.htm?newsid=269857#_digitalcamp
 
-![alt text](image-7.png)
+<img src="image-7.png" alt="alt text" width="50%" />
 
 백엔드가 차려놓은 백첩반상을 프론트가 다 먹을 필요가 없어졌어요.
 먹고싶은 것, 좋아하는 것, 필요한 것만 쏙쏙 뽑아먹을 수 있게 되었습니다.
 
-![alt text](image-20.png)
+<img src="image-20.png" alt="alt text" width="50%" />
 다이어트 성공
 
 <!-- 다이어트 성공 사진 -->
@@ -312,15 +312,15 @@ GraphQL을 실제로 구현하기 위해서는 서버 프레임워크가 필요�
 
 리서치를 해보니 GraphQL 생태계에서 선택할 수 있는 프레임워크 중 큰 파이를 차지 하고 있는 두 가지가 있었는데 바로 Apollo Server와 GraphQL Yoga입니다.
 
-![alt text](image-21.png)
-![alt text](image-22.png)
+<img src="image-21.png" alt="alt text" width="50%" />
+<img src="image-22.png" alt="alt text" width="50%" />
 
 처음에는 입문으로 GraphQL Yoga를 선택했었습니다. 실제로 써봤을 때 구축도 쉬웠고, 문서도 잘 되어있었습니다.
 
 하지만 결국 Apollo Server를 선택하게 되었습니다.
 
 왜?
-![alt text](image-24.png)
+<img src="image-24.png" alt="alt text" width="50%" />
 
 저희가 Apollo Server를 선택하게 된 이유는 다음과 같습니다.
 
@@ -367,29 +367,29 @@ https://npm-compare.com/ko-KR/apollo-server,express-graphql,graphql,graphql-yoga
 
 ## 😏 Episode 4: 쿼리 대신 짜주는 Playground
 
-![alt text](image-26.png)
+<img src="image-26.png" alt="alt text" width="50%" />
 
 그런데 말입니다... 쿼리를 이제 프론트에서 짜야한다고? 처음에는 이 부분이 굉장히 걱정되었습니다. REST API와 달리 프론트엔드 개발자가 직접 쿼리를 작성해야 한다니, 러닝 커브도 있을 것 같고 귀찮은 작업이 늘어날 것 같았거든요.😅
 
 하지만 이런 걱정은 Playground만 있으면 할 필요 없습니다!
 Playground는 Apollo Server에서 제공하는 GraphQL 쿼리를 쉽게 작성하고 테스트할 수 있는 개발자 도구입니다.(Yoga에도 있긴 합니다) Playground는 마치 포스트맨(Postman)처럼 API를 테스트할 수 있는 환경을 제공하는데, 여기에 더해 자동완성 기능까지 제공합니다.
 
-![alt text](image-29.png)
+<img src="image-29.png" alt="alt text" width="50%" />
 
 Apollo Server를 실행하면 서버의 루트 URL(예: localhost:4000)에서 바로 Playground에 접근할 수 있습니다.
 
-![alt text](image-30.png)
+<img src="image-30.png" alt="alt text" width="50%" />
 빨간 박스로 표시된 부분에는 작성한 스키마를 기반으로 필드가 나열되어 있습니다.
 여기서 필요한 값을 클릭하면 해당 값을 가져오는 쿼리가 자동으로 생성됩니다!
 
-![alt text](image-31.png)
+<img src="image-31.png" alt="alt text" width="50%" />
 
-![alt text](image-32.png)
+<img src="image-32.png" alt="alt text" width="50%" />
 
 필요한 값들을 입력하고 실행 버튼을 클릭하면 서버로부터 응답 결과를 바로 확인할 수 있습니다.
 이를 통해 개발자는 복잡한 쿼리를 손쉽게 생성하고 시뮬레이션을 해볼 수 있습니다!!
 
-![alt text](image-27.png)
+<img src="image-27.png" alt="alt text" width="50%" />
 
 ## 🚀 Episode 5: 그래서 결과는?
 
@@ -415,7 +415,7 @@ poc에 들어가기 위해서는 어떻게 해야할지? -->
 
 이번 파일럿을 통해 GraphQL과 Apollo Server를 도입해보았지만, 이제부터 진짜 시작입니다.
 
-![alt text](image-25.png)
+<img src="image-25.png" alt="alt text" width="50%" />
 출처: https://img.freepik.com/premium-photo/businessman-planning-work-company-whiteboard_75891-3192.jpg
 
 현재 우리 팀은 SDUI 완성형을 만들기 위해 다음과 같은 고민들을 하고 있습니다.
@@ -436,6 +436,6 @@ poc에 들어가기 위해서는 어떻게 해야할지? -->
 
 긴 글 읽어주셔서 감사합니다!😊
 
-![alt text](image-28.png)
+<img src="image-28.png" alt="alt text" width="50%" />
 출처:
 https://www.google.com/url?sa=i&url=https%3A%2F%2Fm.blog.naver.com%2Fdd_809%2F221926712657&psig=AOvVaw3eJSNeR8-984oHev5uEk15&ust=1733212038271000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCJi8l5PMiIoDFQAAAAAdAAAAABAE
