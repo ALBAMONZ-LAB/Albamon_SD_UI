@@ -19,7 +19,7 @@
 
 그런데 서버가 UI를 변환한다는게 뚱딴지같다. 
 
-현 시점에서 통상적인 개발 범위는 화면 단을 다루는 프론트엔드 개발자이냐 혹은 데이터를 다루는 백엔드 개발자이냐 둘 중 하나로 나눠지고 있는데, 이 와중에 서버에서 UI를 보내준다는건 어떤 의미인가? 백 번 양보해서 서버가 UI를 처리하더라도, 복잡한 단계의 디자인은 어떻게 처리를 하라는 이야기일까? 
+현 시점에서 통상적인 개발 범위는 화면 단을 다루는 프론트엔드 개발자이냐 혹은 데이터를 다루는 백엔드 개발자이냐 나눠지고 있는데, 이 와중에 서버에서 UI를 보내준다는건 어떤 의미인가? 백 번 양보해서 서버가 UI를 처리하더라도, 복잡한 단계의 디자인은 어떻게 처리를 하라는 이야기일까? 
 
 [//]: # (![img_2.png]&#40;img_2.png&#41;)
 
@@ -75,39 +75,51 @@ export default EventBanner;
 
 이러한 구조는 빠르고 유연하게 변하는 비즈니스 로직에 대응하기에 적합하지 않은 구조이다. 코드 레벨에 제한되어 있다면, 비즈니스 요구사항에 맞춰야 하는 기획자 혹은 사용자의 수요에 대응하기가 어렵다. 이와 같은 어려움을 겪은 경험이 있다면, SD-UI의 도입은 적합한 해결책이 될 수 있다.
 
-(추가) sd ui 쓰면 코드 이렇게 바뀐다
+[//]: # (&#40;추가&#41; sd ui 쓰면 코드 이렇게 바뀐다)
 
-## SD-UI 를 어디에 적용할 수 있는데?
+## [본론 1] 그래서 SD-UI 를 어디에 적용할 수 있는데?
 
-방금 잠시 언급했던 예시처럼, 단순 반복 작업이 계속되었던 이벤트 페이지가 가장 적합하지 않을까 싶었다. 
+우리 서비스를 돌아보며 조건을 톺아볼 수 있을 것 같다. Server에서 UI 정보가 넘어오는 것 만큼, 지나치게 동적 로직 보다는 정형화된 Component가 사용되어야 한다. 
+또한 우리의 목적은 단순 반복 공수를 줄이는 데에 있으므로 간단한 작업이 반복해서 들어가는 페이지어야 한다. 빠르게 변하는 비즈니스 요구사항들을 신속하게 반영함으로 시장의 요구에 적합하게 대응할 수 있는 페이지면 더 좋겠다.  
 
-만약 신규 이벤트를 만들어야 하는 상황이라고 생각해보자. 우리는 그 동안 신규 이벤트를 개발하기 위해서 다음과 같은 공수를 반복적으로 작업해야 했다. 
+이러한 조건을 늘어놓고 판단하자면, 이벤트 페이지가 가장 적합했다.
+우리는 매 신규 이벤트가 반복될 때 마다 다음과 같은 작업이 필요했다.
 
 (기존 이벤트 페이지 이미지)
 
-- 비슷한 Layout과 Style을 기존 이벤트 페이지에서 가져오기
+- 비슷한 Layout과 Style을 기존 이벤트 페이지에서 수령
 - 스타일 수정 등 간단한 작업에도 배포 공수 소모
-- 이미지 재배포하기
+- 이미지 변경 시 재배포 필요
+
+이 잔잔바리 작업들을 개발자가 아니라 Server에서 가져온다면, 
+정형화된 Style 값을 api에서 가져올 수 있다면 
+개발자는 더욱 더 개발에만 집중할 수 있지 않을까?  
+
+## [본론 2] 어떻게 공수를 줄일 수 있는데? - (기대 효과 및 실제 코드 예시)
 
 
+서버에서 Button Component 를 Client에 그리고자 할 때, 이 버튼을 그리기 위해서 어떠한 정보들이 필요할까? color, text 등 눈에 보이는 정보들 외에도, 버튼 클릭시 실행되어야 할 이벤트의 type도 받아올 수 있겠다.
+그렇다면 스키마 명세는 다음과 같다.
 
-## 얼마나 효과적이게 공수를 줄일 수 있는데?
+| 속성            | 타입           | 설명           |
+|----------------|--------------|--------------|
+| type           | "BUTTON"     | 컴포넌트 타입  |
+| text           | string       | 버튼 텍스트     |
+| onClick        | string       | 클릭 핸들러 이름 |
+| width          | string       | 버튼 너비       |
+| height         | number       | 버튼 높이       |
+| color          | string       | 텍스트 색상     |
+| buttonColor    | string       | 버튼 색상       |
+| backgroundColor| string       | 배경색         |
+| fontSize       | number       | 폰트 크기       |
+| fontWeight     | string       | 폰트 두께       |
+| borderRadius   | string       | 테두리 둥글기   |
+| borderColor    | string       | 테두리 색상     |
+| borderWidth    | number       | 테두리 두께     |
 
-서버에서 전달된 UI, 나아가 Component는 어떤 정보를 담고 있어야 할까.
-(스키마 명세 추가)
 
-- 이러한 케이스의 경우
-- 기존의 경우 :
-- SD-UI 적용하였을 경우 : 
+Button Component 의 예시를 실제 코드로 작성해보자. 서버에서는 아래와 같이 IMAGE_WITH_CHILDREN Component를 그리기 위해, IMAGE Component와 Button Component 를 자식으로 두고 있는 UI의 정보를 나타내고 있다.
 
-[//]: # (간단한 업무는 자동화를 시킴으로, 무의미한 반복노동을 줄일 수 있습니다.)
-
-[//]: # ()
-[//]: # (또한 기획자의 요구를 즉각적으로 받아들여, 빠른 배포 프로세스를 가질 수 있습니다.)
-
-SD-UI를 도입하면서 데이터 뿐 아니라 디자인 정보도 서버가 함께 내려주게 됩니다.
-
-예시를 들어볼까요?
 
 ```typescript
 return {
@@ -117,53 +129,183 @@ return {
   row: 2,
   column: 4,
   collection: [
-    {
-      franchiseCode: 46,
-      franchiseName: '던킨',
-      franchiseLogo:
-        'https://imgs.albamon.kr/images/franchise_booth/46/MBrandMain_Logo.gif',
-      keywordCode: '1080001',
-      keywordName: '',
-      partCode: '1080',
-      partName: '',
-    },
-    {
-      franchiseCode: 47,
-      franchiseName: 'CJ 올리브영',
-      franchiseLogo:
-        'https://imgs.albamon.kr/images/franchise_booth/47/MBrandMain_Logo_1.gif',
-      keywordCode: '2060016',
-      keywordName: '',
-      partCode: '2060',
-      partName: '',
-    },
+      {
+          type: "IMAGE_WITH_CHILDREN",
+          backgroundColor: "#ff7e1d",
+          paddingTop: 24,
+          paddingLeft: 24,
+          paddingRight: 24,
+          children: [
+              {
+                  type: "IMAGE",
+                  backgroundColor: "#fff",
+                  width: "100%",
+                  paddingTop: 30,
+                  paddingBottom: 30,
+                  paddingLeft: 24,
+                  paddingRight: 24,
+                  imageUrl:
+                      "https://mts17-mc.albamon.kr/monimg/msa/assets/images/events/campusBattle/share_top.png",
+              },
+              {
+                  // 카카오톡으로 공유하기
+                  type: "BUTTON",
+                  onClick: "handleKakaoShareClick",
+                  width: "100%",
+                  height: 46,
+                  text: "카카오톡으로 공유하기",
+                  color: "#ffffff",
+                  buttonColor: "#000000",
+                  backgroundColor: "#fff",
+                  fontSize: 16,
+                  fontWeight: "700",
+                  borderRadius: "8px",
+                  paddingLeft: 24,
+                  paddingRight: 24,
+                  paddingBottom: 30,
+              },
+          ],
+      },
   ],
 };
 ```
 
-다음의 데이터를 받아서, 다음과 같은 화면을 구성할 수 있습니다.
+현재 화면에서 보여주고자 하는 Component들의 정보를 배열로 받아오고,
+Client단에서 화면의 정보를 받아 Component type에 따라 각각 다른 Component를 그려준다.
+다음과 같이 사전에 Component 타입에 따른 Component를 매핑해두면, 서버에서 받아온 정보대로 유연한 UI를 그릴 수 있다.
 
-(이미지)
+```typescript
+const MAPPED_COMPONENTS = {
+    TITLE: Title,
+    IMAGE_WITH_CHILDREN: ImageWithChildren,
+    GROUP: Group,
+    IMAGE: Image,
+    BUTTON: Button,
+    SPLIT: Split,
+    CAROUSEL: Carousel,
+    FLOATING_BUTTON: FloatingButton,
+    FOOTER: Footer,
+    LIST: List,
+};
+```
 
-data.row, data.column 을 통해 row, column으로 이루어진 표의 레이아웃을 변경할 수 있습니다.
+이 때 간단한 컴포넌트 이외에도 Flex Wrapper 안에서 서로 유기적으로 구성되게 하기 위하여,
+컴포넌트 안의 자식 컴포넌트를 랜더링해주기 위해 재귀적으로 컴포넌트를 호출하였다.
 
-데이터 변경 후, 실제 배열이 변경된 것을 확인할 수 있습니다.
+```typescript
+const RenderComponent = (data) => {
+    if (!data?.type) return null;
 
-(이미지)
+    const Component = MAPPED_COMPONENTS[data.type];
+    if (!Component) return null;
 
-과거 행과 열이 클라이언트에 박혀있었기 때문에, 배열을 바꾸려면 클라이언트 수정이 필요했습니다.
-하지만, SD-UI를 통한다면, 클라이언트 수정 없이 서버의 응답 값만 바꾸는 것 만으로 자유롭게 레이아웃을 조정할 수 있습니다.
+    return (
+        <Component {...data}>
+            {data.children?.map((child, index) => (
+                <RenderComponent key={`${child.type}_${index}`} {...child} />
+            ))}
+        </Component>
+);
+};
 
+export const EventTemplate = () => {
+    const {
+        data: eventList,
+    } = useQuery(GET_EVENT_LIST, {
+        variables: { eventId: '1' },
+    });
+
+    return (
+        <div className={cx(rootClass)}>
+            <DefaultLayout>
+                {eventList.getEventPageComponents.components.map((item, index) => (
+                        <RenderComponent key={`${item.type}_${index}`} {...item} />
+        ))}
+            </DefaultLayout>
+            </div>
+);
+};
+
+```
+
+만약 이미지가 변경된다면, 따로 FE 소스를 수정할 필요 없이 서버에서만 이미지 url을 수정하면 된다.
+
+```typescript
+{
+                  type: "IMAGE",
+                  backgroundColor: "#fff",
+                  width: "100%",
+                  paddingTop: 30,
+                  paddingBottom: 30,
+                  paddingLeft: 24,
+                  paddingRight: 24,
+                  imageUrl:
+                      "https://mts17-mc.albamon.kr/monimg/msa/assets/images/events/campusBattle/share_top.png",
+              }
+```
+
+서버에서 의도한 대로, 2개의 Component가 하나의 부모 Component안에 잘 배치되어 있다. 
+
+![img_3.png](./blog_img/img_3.png)
+
+버튼 이벤트의 경우에도 서버에서 미리 내려오는 onClick 값을 이용하면 복잡한 로직의 함수도 Client 단에서 핸들링 할 수 있다.
+
+```typescript
+
+interface HandlerMap {
+    [key: string]: EventHandler;
+}
+
+const handlerMap: HandlerMap = {
+    handleImageGroupClick: () => {
+        alert('Image group clicked');
+    },
+    handleFloatingButtonClick: () => {
+        alert('Floating button clicked');
+    },
+    handleKakaoShareClick: () => {
+        alert('Kakao share clicked');
+    },
+    handleImageDownload: () => {
+        alert('Image download clicked');
+    },
+    handleTextCopy: () => {
+        alert('Text copy clicked');
+    },
+};
+
+export const mapHandlerName = (handlerName: string): EventHandler => {
+    return (
+        handlerMap[handlerName] ||
+        (() => console.warn(`Handler ${handlerName} not found`))
+    );
+};
+
+
+// mapHandlerName 사용 예시
+<button
+    style={{
+    width,
+        height,
+        color,
+        backgroundColor: buttonColor,
+        borderRadius,
+        border: 0,
+        borderWidth,
+}}
+onClick={mapHandlerName(onClick)}
+    >
+    {text}
+    </button>
+
+```
 
 ## 어떻게 구현했는데? (사용 기술)
 
 
 
-
-
-## 폴더 구조도
-
-
-
 ## 마치며
-- 기간 변경/특정 유저에게 다른 UI 제공 등에 사용 가능
+- 기간 변경
+- 사용자의 개인화
+
+- 단점: 어떤 화면이 그려지고 있는지 코드 레벨에서 파악하기 어렵다.
