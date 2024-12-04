@@ -93,6 +93,9 @@ export default EventBanner;
 
 ## 얼마나 효과적이게 공수를 줄일 수 있는데?
 
+서버에서 전달된 UI, 나아가 Component는 어떤 정보를 담고 있어야 할까.
+(스키마 명세 추가)
+
 - 이러한 케이스의 경우
 - 기존의 경우 :
 - SD-UI 적용하였을 경우 : 
@@ -154,7 +157,7 @@ data.row, data.column 을 통해 row, column으로 이루어진 표의 레이아
 
 ## 어떻게 구현했는데? (사용 기술)
 
-서버에서부터 정해진 UI Component
+
 
 
 
