@@ -85,7 +85,7 @@ export default EventBanner;
 이러한 조건을 늘어놓고 판단하자면, 이벤트 페이지가 가장 적합했다.
 우리는 매 신규 이벤트가 반복될 때 마다 다음과 같은 작업이 필요했다.
 
-(기존 이벤트 페이지 이미지)
+![img_4.png](./blog_img/img_4.png)
 
 - 비슷한 Layout과 Style을 기존 이벤트 페이지에서 수령
 - 스타일 수정 등 간단한 작업에도 배포 공수 소모
@@ -118,7 +118,14 @@ export default EventBanner;
 | borderWidth    | number       | 테두리 두께     |
 
 
-Button Component 의 예시를 실제 코드로 작성해보자. 서버에서는 아래와 같이 IMAGE_WITH_CHILDREN Component를 그리기 위해, IMAGE Component와 Button Component 를 자식으로 두고 있는 UI의 정보를 나타내고 있다.
+Button Component 의 예시를 실제 코드로 작성해보자.
+서버에서는 아래와 같이 데이터를 뿌려주고 있다. 
+
+현재 화면에서 보여주고자 하는 Component들의 정보를 collection의 배열로 보내고 있다. 각 type을 지닌 Component 들의 순서를 서버에서 제어하여,
+노출하고 싶은 UI를 조정할 수 있다. 물론 필요 없는 것은 빼고 보내면 된다.
+
+또한 우리는 CSS의 여러 복잡한 속성을 데이터에서 나태내고 싶었고, 그 결과 children 속성을 이용하여 Flex 패턴을 유연하게 구현해보고자 했다.
+아래 예시의 IMAGE_WITH_CHILDREN Component는 children으로 IMAGE Component와 Button Component 를 자식으로 두고 있는 것을 확인할 수 있다.
 
 
 ```typescript
@@ -148,7 +155,6 @@ return {
                       "https://mts17-mc.albamon.kr/monimg/msa/assets/images/events/campusBattle/share_top.png",
               },
               {
-                  // 카카오톡으로 공유하기
                   type: "BUTTON",
                   onClick: "handleKakaoShareClick",
                   width: "100%",
@@ -170,9 +176,7 @@ return {
 };
 ```
 
-현재 화면에서 보여주고자 하는 Component들의 정보를 배열로 받아오고,
-Client단에서 화면의 정보를 받아 Component type에 따라 각각 다른 Component를 그려준다.
-다음과 같이 사전에 Component 타입에 따른 Component를 매핑해두면, 서버에서 받아온 정보대로 유연한 UI를 그릴 수 있다.
+Client단에서 화면의 정보를 받아 사전에 지정해 둔 Component type에 매칭되는 Component를 매핑시켰다.
 
 ```typescript
 const MAPPED_COMPONENTS = {
@@ -189,8 +193,8 @@ const MAPPED_COMPONENTS = {
 };
 ```
 
-이 때 간단한 컴포넌트 이외에도 Flex Wrapper 안에서 서로 유기적으로 구성되게 하기 위하여,
-컴포넌트 안의 자식 컴포넌트를 랜더링해주기 위해 재귀적으로 컴포넌트를 호출하였다.
+앞서 children 속성을 언급한 적이 있다.
+Client 단에서 해당 속성이 있을 경우, 재귀적으로 컴포넌트를 호출하게끔 하여 복잡한 CSS Flex 패턴을 구현하게 하였다.
 
 ```typescript
 const RenderComponent = (data) => {
@@ -248,6 +252,7 @@ export const EventTemplate = () => {
 
 ![img_3.png](./blog_img/img_3.png)
 
+함수의 경우에는 어떻게 할까?
 버튼 이벤트의 경우에도 서버에서 미리 내려오는 onClick 값을 이용하면 복잡한 로직의 함수도 Client 단에서 핸들링 할 수 있다.
 
 ```typescript
@@ -300,12 +305,35 @@ onClick={mapHandlerName(onClick)}
 
 ```
 
-## 어떻게 구현했는데? (사용 기술)
+[//]: # (## 어떻게 구현했는데?)
 
 
 
-## 마치며
-- 기간 변경
-- 사용자의 개인화
 
-- 단점: 어떤 화면이 그려지고 있는지 코드 레벨에서 파악하기 어렵다.
+## 앞으로의 과제
+
+View를 구성하는 정보를 서버에서 받아온다는 생각은 꽤 인상적인 접근법이다.
+더불어 번거롭게 여러번 작업해야 했던 일들을 줄여준다면, 우리에게는 분명 환영할 만한 일이다.
+
+한편, 모든 기술이 그렇듯이 Server Driven UI도 문제점 또한 있다. 
+아주 복잡하거나 동적인 UI는 서버에서 가져오기 까다롭기 때문에, 결국엔 FE에서의 수정이 필요하다. 
+이 기술은 그러니까, 아주 단순하고 반복적인 작업에 적합하게 보이기도 한다.
+(물론 어떻게 사용하는지에 따라 다른 결과를 가져오겠지만)
+
+어디어서 화면이 어떻게 그려지는지 코드 레벨에서 파악하기 어렵다는 단점 또한 언급할만 하다. 
+JSON으로 내려오는 데이터만으로는 실제로 화면에 반영이 어떻게 되는지는 직관적으로 와닿지 않는다. 
+
+다만, 단점이 없는 기술은 없기에 항상 더 중요한 것은 단점을 인지하는 시야와 대안이다. 
+따라서 우리는 앞으로 이와 같은 과제를 해결해보려 한다. 
+
+1. UI-Template 만들기
+: 요컨데 특정 필요 페이지에 한하여 사전에 협업 부서와 변경 가능한 UI-Template를 정의해둘 수 있다.
+이를 이용한다면, 충분히 요구사항을 충족할 수 있지 않을까?
+
+
+2. 미리보기 VIEW 만들기
+: 관리자 페이지를 만들어 개발자 이외 직군이 바로 변경사항을 입력할 수 있게 만들고,
+데이터를 입력하는 즉시 관리자 내부 미리보기 VIEW 등을 만든다면 UI 반영 또한 예상할 수 있을 것이다.
+
+
+앞으로 이러한 과제들을 해결해가면서, SD-UI프로젝트를 조금 더 발전시켜 가고자 한다.
