@@ -252,7 +252,9 @@ export const EventTemplate = () => {
 
 ![img_3.png](./blog_img/img_3.png)
 
-함수의 경우에는 어떻게 할까?
+#### Actions
+
+단순히 화면에 보이는 값 뿐 아닌, Event handling의 경우에는 어떻게 할까?
 버튼 이벤트의 경우에도 서버에서 미리 내려오는 onClick 값을 이용하면 복잡한 로직의 함수도 Client 단에서 핸들링 할 수 있다.
 
 ```typescript
@@ -305,10 +307,84 @@ onClick={mapHandlerName(onClick)}
 
 ```
 
-[//]: # (## 어떻게 구현했는데?)
+## 어떻게 구현했는데?
+
+Server Driven UI 를 구현하기 위하여, graphql, Apollo Client/Server 를 사용하였다.
+이 기술을 사용한 이유는, SD-UI의 핵심 요구사항이라고 할 수 있는 유연한 데이터 요청, 실시간 데이터 업데이트, 구조화된 UI 데이터 제공을 효과적으로 충족할 수 있기 때문이다.
 
 
+#### 데이터 요청 최적화: GraphQL의 Over-fetching & Under-fetching 문제 해결
+SD-UI를 사용할 때 클라이언트는 각 화면 구성하는데 필요한 데이터를 서버에 요청하게 된다.
+기존 REST API는 필요한 데이터만 정확하게 가져오기가 어렵고, 과도한 데이터 전송(Over-fetching)이나 부족한 데이터 요청(Under-fetching)이 발생하는 경우가 빈번했다.
+이 때 GraphQL은 필요한 데이터만 요청할 수 있게 도와주어 데이터의 Over-fetching 문제를 해결할 수 있고,
+GraphQL 쿼리 하나로 여러 데이터를 조합해 가져올 수 있기 때문에, REST API의 다중 엔드포인트 호출 문제 또한 해결할 수 있다.
 
+```graphql
+query GetEventPageComponents($eventId: ID!) {
+  getEventPageComponents(eventId: $eventId) {
+    resultCode
+    resultMessage
+    components {
+      id
+      type
+      props
+    }
+  }
+}
+```
+
+#### UI 구성 데이터를 위한 GraphQL의 Fragment 사용
+
+GraphQL의 재사용 가능한 필드 묶음인 Fragment는 UI 컴포넌트를 정의하고, 관리하는데 적합하다.
+클라이언트는 Fragment를 사용해 요청 시 서버에서 사용 가능한 모든 UI 컴포넌트를 명시할 수 있다.
+
+```graphql
+fragment ComponentFields on Component {
+  id
+  type
+  props
+}
+
+query GetComponents($eventId: ID!) {
+  getEventPageComponents(eventId: $eventId) {
+    components {
+      ...ComponentFields
+    }
+  }
+}
+```
+
+#### 실시간 데이터 업데이트: Subscriptions 구현
+
+SD-UI는 실시간 변경사항 반영이 중요한데,
+GraphQL의 서버의 특정 이벤트를 구독할 수 있는 Subscriptions 기능과 Apollo Server를 활용하여 
+실시간 데이터 업데이트를 구현할 수 있다.
+
+```graphql
+subscription OnComponentAdded($eventId: ID!) {
+  componentAdded(eventId: $eventId) {
+    id
+    type
+    props
+  }
+}
+```
+새로운 컴포넌트 추가가 되면, resolvers를 활용하여 실시간 요구사항을 충족할 수 있다. 
+
+```javascript
+const { PubSub } = require('graphql-subscriptions');
+const pubsub = new PubSub();
+
+const resolvers = {
+  Subscription: {
+    componentAdded: {
+      subscribe: (_, { eventId }) => pubsub.asyncIterator(`COMPONENT_ADDED_${eventId}`),
+    },
+  },
+};
+```
+
+GraphQL 지원이 최적화되어 있다는 것 또한 언급할만한 선정 이유이다.
 
 ## 앞으로의 과제
 
