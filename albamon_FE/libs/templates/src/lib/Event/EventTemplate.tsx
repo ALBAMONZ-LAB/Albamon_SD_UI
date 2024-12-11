@@ -71,11 +71,10 @@ export const EventTemplate = () => {
     loading,
     error,
   } = useQuery(GET_EVENT_LIST, {
-    // TODO 임의 eventId
     variables: { eventId: '1' },
+    fetchPolicy: 'network-only',
+    pollInterval: 5000,
   });
-
-  // console.log(eventList.getEventPageComponents.components);
 
   if (loading) return <p>loading...</p>;
   if (error) return <p>Error : {error?.message} </p>;
