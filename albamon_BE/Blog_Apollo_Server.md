@@ -5,11 +5,11 @@
 />
 ```
 
-# 🔥 REST API 때려치우고 GraphQL, Apollo Server 도입한 후기
+# 🔥 알바몬 페이지 개선을 위한 term project 여정 (1)
 
 안녕하세요!
 알바몬제트개발팀의 김규리입니다.
-오늘은 Server Driven UI 파일럿를 진행하며 GraphQL, Apollo Server를 도입하게 된 과정을 공유하고자 합니다.
+오늘은 Server Driven UI 파일럿을 진행하며 GraphQL, Apollo Server를 도입하게 된 과정을 공유하고자 합니다.
 가볍게 읽어주시면 감사할 것 같습니다😄
 
 ## 😱 프롤로그: "GraphQL과 첫 번째 기억"
